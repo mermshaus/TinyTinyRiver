@@ -1,0 +1,52 @@
+<?php
+
+namespace mermshaus\TinyTinyRiver;
+
+?>
+
+<div class="entry-list">
+
+    <?php foreach ($tpl['entriesByDate'] as $date => $entries): ?>
+
+        <p class="datesep">
+            <time datetime="<?=e($date)?>"><?=date('l, F d, Y', strtotime($date))?></time>
+        </p>
+
+        <ul>
+            <?php foreach ($entries as $entry): ?>
+                <li>
+                    <div class="entry-header clearfix">
+                        <div class="entry-feed">
+                            <a href="<?=e($entry['feed_link'])?>">
+                            <?=e(trim($entry['feed_title']))?>
+                            </a>
+                        </div>
+
+                        <div class="entry-date">
+                            <time datetime="<?=e(date('c', $entry['updated']))?>"><?=e(date('H:i', $entry['updated']))?></time>
+                        </div>
+                    </div>
+
+                    <div class="entry-content">
+                        <img class="feed-icon"
+                             src="<?=e($entry['feed_icon_url'])?>"
+                             alt="<?=e($entry['feed_title'])?>"
+                             title="<?=e($entry['feed_title'])?>"
+                        >
+                        <p class="title"><a href="<?=e($entry['link'])?>"><?=e($entry['title'])?></a></p>
+                        <p class="content"><?=e($entry['content'])?></p>
+
+                        <?php if ($entry['comments_link'] !== ''): ?>
+
+                            <p class="comment-link"><a href="<?=e($entry['comments_link'])?>"><?=e($entry['comments_count'])?> <?=((int)$entry['comments_count'] === 1) ? 'comment' : 'comments'?></a></p>
+
+                        <?php endif; ?>
+
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+
+    <?php endforeach; ?>
+
+</div>

@@ -1,0 +1,51 @@
+<?php
+
+namespace mermshaus\TinyTinyRiver;
+
+?><!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title><?=e($tpl['categoryTitle'])?> - TinyTinyRiver</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="./assets/favicon.ico" />
+    <link rel="stylesheet" href="./assets/screen.css" type="text/css">
+</head>
+
+<body id="top">
+
+<div class="content">
+
+    <div class="category-list-wrapper clearfix">
+        <div class="category-list">
+            <ul class="clearfix">
+                <?php foreach ($tpl['categories'] as $category): ?>
+                    <?php
+                    $cssClass = ((int)$category['id'] === $tpl['categoryId']) ? ' class="active"' : '';
+                    ?>
+
+                    <li<?=$cssClass?>>
+                        <a href="<?=e(url('index', array('categoryId' => $category['id'])))?>"><?=e($category['title'])?></a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+
+    <?php
+    render('_entry-list', array('entriesByDate' => $tpl['entriesByDate']));
+    ?>
+
+    <footer>
+        <p><a href="https://github.com/mermshaus/TinyTinyRiver">TinyTinyRiver</a></p>
+    </footer>
+
+    <div class="nav-jump-top"><a href="#top" title="Jump to top">&#x25B2;</a></div>
+
+</div>
+
+
+</body>
+
+</html>
